@@ -8,8 +8,18 @@ object Tree {
 
   def double(t: Tree[Int]): Tree[Int] =
     t match {
-      case Leaf(v) => Leaf(v * 2)
-      case Branch(left, right) => Branch(double(left), double(right))
+      case Leaf(v) =>
+        Leaf(v * 2)
+      case Branch(left, right) =>
+        Branch(double(left), double(right))
+    }
+
+  def triple(t: Tree[Int]): Tree[Int] =
+    t match {
+      case Leaf(v) =>
+        Leaf(v * 3)
+      case Branch(left, right) =>
+        Branch(double(left), double(right))
     }
 
   def map[A, B](t: Tree[A])(f: A => B): Tree[B] =
@@ -20,6 +30,9 @@ object Tree {
 
   def double2(t: Tree[Int]): Tree[Int] =
     map(t)((elem: Int) => 2 * elem)
+
+  def triple2(t: Tree[Int]): Tree[Int] =
+    map(t)((elem: Int) => 3 * elem)
 
   def sum(t: Tree[Int]): Int =
     t match {
