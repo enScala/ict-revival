@@ -40,6 +40,23 @@ object Closure {
   }
 }
 
+object PureVsImpureFunctions {
+
+  class Person(var address: String) {
+    def change(newAddress: String) =
+      address = newAddress
+  }
+
+  // has side-effects because it changes the person object
+  def impure (person: Person, newAddress: String) : Unit = {
+    person.change(newAddress)
+  }
+
+  // no side-effects because the result depends only on its parameters
+  def pure(a: Int, b: Int) : Int = a + (b * 2)
+
+}
+
 
 
 
