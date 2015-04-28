@@ -1,6 +1,6 @@
 package com.endava.ict
 
-class ErrorHandling {
+object ErrorHandling {
 
   def fail1(i: Int): Int = {
     val y: Int = throw new Exception()
@@ -35,15 +35,48 @@ class ErrorHandling {
     def average2(list: List[Double]): Option[Double] =
       if (list.isEmpty) None
       else Some(list.sum / list.length)
-    
   }
 
   sealed abstract class Try[+T]
   final case class Failure[+T](exception: Throwable) extends Try[T]
   final case class Success[+T](value: T) extends Try[T]
 
+  case object Try {
+
+    def tryOperation(a: Int, b: Int) : Try[Int] =
+      try {
+        Success(a / 0)
+      } catch {
+        case ex: Exception =>
+          Failure(ex)
+      }
+
+    def divideNums(a: Int, b: Int) = {
+      //use pattern matching to handle both cases
+      tryOperation(a, b) match {
+        case Success(result) => // division was successful
+        case Failure(exception) => // division was unsuccessful
+      }
+    }
+  }
+
   sealed trait Either[+E,+A]
   case class Left[+E](get: E) extends Either[E, Nothing]
   case class Right[+A](get: A) extends Either[Nothing, A]
 
+  case object Either {
+
+    def eitherOperation(a: Int): Either[String, Int] = {
+      if (a > 0) Right(a)
+      else Left("integer is negative")
+    }
+
+    def getPositiveNum(a: Int) = {
+      //use pattern matching to handle both cases
+      eitherOperation(a) match {
+        case Right(right) => // we have a positive number,
+        case Left(left) => // we have a string
+      }
+    }
+  }
 }
