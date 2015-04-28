@@ -38,6 +38,13 @@ object Closure {
   def func(a : Int) : Int = {
     a + one
   }
+
+
+  /**
+   * Function that highlights the fact that *closure* binds to the variable and not it's value
+   */
+  def func2(seed: Int) : Int => Int =
+    { a: Int => seed + a }
 }
 
 object PureVsImpureFunctions {
@@ -57,6 +64,9 @@ object PureVsImpureFunctions {
 
 }
 
+object ReferencialTransparency {
+
+}
 
 
 
