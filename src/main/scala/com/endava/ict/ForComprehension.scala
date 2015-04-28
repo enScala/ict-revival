@@ -22,9 +22,13 @@ object Library {
   /**
    * Find all books written by a certain author
    */
-  def booksByAuthor(author: String) : List[String] =
-    for (b <- books; a <- b.authors if a.toLowerCase startsWith author.toLowerCase)
-      yield b.title
+
+  def titlesByAuthor2(author: String) : List[String] =
+    for {
+      b <- books
+      a <- b.authors
+      if a.toLowerCase startsWith author.toLowerCase
+    } yield b.title
 
   /**
    * Find all authors that have written two books
