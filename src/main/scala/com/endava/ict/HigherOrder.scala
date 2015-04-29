@@ -2,7 +2,7 @@ package com.endava.ict
 
 class HigherOrder {
 
-  def incrementResult(prefix: String, v: Int, f: Int => Int): Int =
+  def incrementResult(v: Int, f: Int => Int): Int =
     f(v) + 1
 
   def combine[A](z: A, c: (A, A) => A, v: A, f: A => A): A =

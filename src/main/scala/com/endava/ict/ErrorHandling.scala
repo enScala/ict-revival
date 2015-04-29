@@ -45,7 +45,7 @@ object ErrorHandling {
 
     def tryOperation(a: Int, b: Int) : Try[Int] =
       try {
-        Success(a / 0)
+        Success(a / b)
       } catch {
         case ex: Exception =>
           Failure(ex)

@@ -29,22 +29,15 @@ object FunctionsAsValues {
 
 object Closure {
 
-  var one = 2
+  var num = 2
 
   /**
    * Function is considered *open* since it needs the variable *one*, which is defined outside its scope
    * At runtime it captures (also called it *closes* over) *one*, hence the name *closure*
    */
   def func(a : Int) : Int = {
-    a + one
+    a + num
   }
-
-
-  /**
-   * Function that highlights the fact that *closure* binds to the variable and not it's value
-   */
-  def func2(seed: Int) : Int => Int =
-    { a: Int => seed + a }
 }
 
 object PureVsImpureFunctions {
@@ -61,10 +54,6 @@ object PureVsImpureFunctions {
 
   // no side-effects because the result depends only on its parameters
   def pure(a: Int, b: Int) : Int = a + (b * 2)
-
-}
-
-object ReferencialTransparency {
 
 }
 
