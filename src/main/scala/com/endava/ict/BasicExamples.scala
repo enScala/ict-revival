@@ -42,18 +42,35 @@ object Closure {
 
 object PureVsImpureFunctions {
 
-  class Person(var address: String) {
-    def change(newAddress: String) =
-      address = newAddress
-  }
+  class Person(var address: String)
 
   // has side-effects because it changes the person object
   def impure (person: Person, newAddress: String) : Unit = {
-    person.change(newAddress)
+    person.address = newAddress
   }
 
   // no side-effects because the result depends only on its parameters
   def pure(a: Int, b: Int) : Int = a + (b * 2)
+
+  var x = 1
+
+  x = x + 1
+
+  2 * (x + 1)
+
+
+  def factorial(a: Int) = {
+    def loop(a: Int, acc: Int): Int = {
+      if (a <= 0) acc
+      else loop(a - 1, a * acc)
+    }
+
+    // apply the tail-recursive function
+    loop(a, 1)
+  }
+
+  def curried(a: Int)(b: Int): Int =
+    a + b
 
 }
 

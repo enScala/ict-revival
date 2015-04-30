@@ -22,10 +22,20 @@ object Tree {
         Branch(double(left), double(right))
     }
 
-  def map[A, B](t: Tree[A])(f: A => B): Tree[B] =
+  def map2[A, B](t: Tree[A])(f: A => B): Tree[B] =
     t match {
-      case Leaf(v) => Leaf(f(v))
-      case Branch(left, right) => Branch(map(left)(f), map(right)(f))
+      case Leaf(v) =>
+        Leaf(f(v))
+      case Branch(left, right) =>
+        Branch(map2(left)(f), map2(right)(f))
+    }
+
+  def map(t: Tree[Int])(f: Int => Int): Tree[Int] =
+    t match {
+      case Leaf(v) =>
+        Leaf(f(v))
+      case Branch(left, right) =>
+        Branch(map(left)(f), map(right)(f))
     }
 
   def double2(t: Tree[Int]): Tree[Int] =
@@ -37,13 +47,15 @@ object Tree {
   def sum(t: Tree[Int]): Int =
     t match {
       case Leaf(v) => v
-      case Branch(left, right) => sum(left) + sum(right)
+      case Branch(left, right) =>
+        sum(left) + sum(right)
     }
 
   def product(t: Tree[Int]): Int =
     t match {
       case Leaf(v) => v
-      case Branch(left, right) => product(left) * product(right)
+      case Branch(left, right) =>
+        product(left) * product(right)
     }
 
   def size[A](t: Tree[A]): Int =

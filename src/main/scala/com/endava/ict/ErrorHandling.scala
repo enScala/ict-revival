@@ -26,37 +26,29 @@ object ErrorHandling {
   sealed trait Option[+A] {}
   case class Some[+A](get: A) extends Option[A]
   case object None extends Option[Nothing]
-  
-  case object Option {
 
-    def average(list: List[Double]): Double =
-      list.sum / list.length
+  def average(list: List[Double]): Double =
+    list.sum / list.length
 
-    def average2(list: List[Double]): Option[Double] =
-      if (list.isEmpty) None
-      else Some(list.sum / list.length)
-  }
+  def average2(list: List[Double]): Option[Double] =
+    if (list.isEmpty) None
+    else Some(list.sum / list.length)
 
   sealed abstract class Try[+T]
-  final case class Failure[+T](exception: Throwable) extends Try[T]
+  final case class Failure[+T](e: Throwable) extends Try[T]
   final case class Success[+T](value: T) extends Try[T]
 
-  case object Try {
+  def divide(a: Int, b: Int): Try[Int] =
+    try {
+      Success(a / b)
+    } catch { case ex: Exception => Failure(ex) }
 
-    def tryOperation(a: Int, b: Int) : Try[Int] =
-      try {
-        Success(a / b)
-      } catch {
-        case ex: Exception =>
-          Failure(ex)
-      }
-
-    def divideNums(a: Int, b: Int) = {
-      //use pattern matching to handle both cases
-      tryOperation(a, b) match {
-        case Success(result) => // division was successful
-        case Failure(exception) => // division was unsuccessful
-      }
+  def safe(a: Int, b: Int): String = {
+    val result = divide(a, b)
+    //use pattern matching to handle both cases
+    result match {
+      case Success(result) => "yay!"
+      case Failure(exception) => "oh, no!"
     }
   }
 

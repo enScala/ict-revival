@@ -21,8 +21,7 @@ public class QuicksortImperativeJava {
 
     public void sort1(int l, int r) {
         int pivot = array[(l + r) / 2];
-        int i = l;
-        int j = r;
+        int i = l, j = r;
         while (i <= j) {
             while (array[i] < pivot) i += 1;
             while (array[j] > pivot) j -= 1;

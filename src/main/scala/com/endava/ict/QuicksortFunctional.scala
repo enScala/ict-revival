@@ -9,7 +9,8 @@ object QuicksortFunctional {
       Array.concat(
         sort(array filter (x => pivot > x)),
              array filter (x => pivot == x),
-        sort(array filter (x => pivot < x)))
+        sort(array filter (x => pivot < x))
+      )
     }
   }
 
